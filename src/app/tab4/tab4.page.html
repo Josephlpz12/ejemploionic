@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Mis Reservas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Mis Reservas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card-content *ngFor="let reserva of reservas">
+    <ion-item *ngIf="reserva.correo == usuario.correo">
+     <ion-list>
+      <ion-item>
+        <ion-label>Cantidad de Pasajeros: {{reserva.cantidadPasajeros}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Observaciones: {{reserva.observaciones}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estado: {{reserva.idestado | estados : estado}}</ion-label>
+      </ion-item>
+
+     </ion-list>
+    </ion-item>
+</ion-card-content> 
+  
+</ion-content>

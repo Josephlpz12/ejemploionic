@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Viajes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Viajes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card-content *ngFor="let viaje of viaje">
+  
+    <ion-list>
+      <ion-item>
+        <ion-label>{{viaje.fechaPartida | date}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{viaje.fechaRegreso | date}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{viaje.cupo}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{viaje.descripcion}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{viaje.origen |lugares : lugares}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{viaje.destino | lugares : lugares}}</ion-label>
+      </ion-item>
+     
+    </ion-list>
+    <ion-button  fill="clear" (click)="presentAlert(viaje)" >Reservar</ion-button>
+    <ion-button  fill="clear" (click)="presentAlert2(viaje)">Comentar</ion-button>
+    <ion-button expand="block" (click)="setOpen(true, viaje)">Ver Comentarios</ion-button>
+
+          <ion-modal [isOpen]="isModalOpen">
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-title>Comentarios</ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="setOpen(false, viaje)">Close</ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+              <ion-content class="ion-padding">
+                <ion-card-content>
+
+                  <div *ngFor="let comentario of comentario">
+                    <div *ngIf="comentario.idviaje == idviaje">
+                      <ion-list>
+                        <ion-item>
+                          <ion-title>{{comentario.texto}}</ion-title>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label>{{comentario.fecha | date}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label>{{comentario.correo}}</ion-label>
+                        </ion-item>
+                      </ion-list>
+                    </div>
+                  </div>
+                  
+                </ion-card-content>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+  </ion-card-content>
+  
+  <br>
+  <br>
+  <br>
+
+</ion-content>
